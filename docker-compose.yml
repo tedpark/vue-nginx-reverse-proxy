@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+  gateway:
+    container_name: gateway
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+
+  frontend-home:
+    container_name: frontend-home
+    build:
+      context: ./frontend-home
+      dockerfile: Dockerfile
+
+  frontend-dashboard:
+    container_name: frontend-dashboard
+    build:
+      context: ./frontend-dashboard
+      dockerfile: Dockerfile
+
+  backend:
+    container_name: backend
+    image: node:14.10.1
+    volumes:
+      - ./backend:/app
+    command: ["sh", "-c", "ls && cd /app && npm install && npm run start"]
